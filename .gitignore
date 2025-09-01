@@ -1,0 +1,30 @@
+# Environment variables
+.env
+
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.docstates
+*.swp
+*.swo
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.rsuser
+
+# Logs
+*.log
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# OS
+.DS_Store
+Thumbs.db
