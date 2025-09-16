@@ -386,7 +386,7 @@ export default function CustomerDetailsPage() {
                         >
                           <div className="text-sm text-gray-900">{formatDate(matter.createdAt)}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4 whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                           <div className="flex space-x-2">
                             <button
                               onClick={() => handleEditMatter(matter)}

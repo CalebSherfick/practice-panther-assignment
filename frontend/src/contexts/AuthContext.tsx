@@ -1,13 +1,13 @@
-import { createContext, useState, useEffect } from 'react';
-import type { ReactNode } from 'react';
-import type { User } from '../types/auth';
-import { authService } from '../services/authService';
+import { createContext, useState, useEffect } from "react";
+import type { ReactNode } from "react";
+import type { LoginRequest, SignupRequest, User } from "../types/auth";
+import { authService } from "../services/authService";
 
 interface AuthContextType {
   user: User | null;
   isLoading: boolean;
-  login: (email: string, password: string) => Promise<void>;
-  signup: (email: string, password: string, firmName: string) => Promise<void>;
+  login: (request: LoginRequest) => Promise<void>;
+  signup: (request: SignupRequest) => Promise<void>;
   logout: () => void;
 }
 
@@ -27,8 +27,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           const userData = await authService.getMe();
           setUser(userData);
         } catch (error) {
-          console.error('Auth check failed:', error);
+          console.error("Auth check failed:", error);
           authService.logout();
+          // Added setUser(null) to ensure user state is cleared on failure
+          setUser(null);
         }
       }
       setIsLoading(false);
@@ -37,13 +39,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     checkAuth();
   }, []);
 
-  const login = async (email: string, password: string) => {
-    const { user: userData } = await authService.login({ email, password });
+  const login = async (request: LoginRequest) => {
+    const { user: userData } = await authService.login(request);
     setUser(userData);
   };
 
-  const signup = async (email: string, password: string, firmName: string) => {
-    const { user: userData } = await authService.signup({ email, password, firmName });
+  const signup = async (request: SignupRequest) => {
+    const { user: userData } = await authService.signup(request);
     setUser(userData);
   };
 

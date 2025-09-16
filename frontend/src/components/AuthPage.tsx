@@ -41,9 +41,9 @@ export default function AuthPage() {
 
     try {
       if (isLogin) {
-        await login(data.email, data.password);
+        await login({ email: data.email, password: data.password });
       } else {
-        await signup(data.email, data.password, data.firmName!);
+        await signup({ email: data.email, password: data.password, firmName: data.firmName! });
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");

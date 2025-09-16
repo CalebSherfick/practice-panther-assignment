@@ -73,7 +73,6 @@ namespace Api.Controllers
         /// Get current authenticated user information
         /// </summary>
         [HttpGet("me")]
-        [Authorize]
         public async Task<IActionResult> GetMe(CancellationToken cancellationToken)
         {
             try
